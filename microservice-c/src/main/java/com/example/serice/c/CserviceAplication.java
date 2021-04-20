@@ -13,6 +13,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @EnableDiscoveryClient
 @SpringBootApplication
+//@MapperScan("com.example.service.c")
 public class CserviceAplication {
 
     public static void main(String[] args) {

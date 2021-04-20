@@ -1,0 +1,11 @@
+version: '3'
+services:
+  nacos:
+    image: nacos/nacos-server:1.4.1
+    container_name: nacos-standalone-local
+    environment:
+      - MODE=standalone
+    volumes:
+      - D:\docker\nacos-compose\logs:/home/nacos/logs
+    ports:
+      - 8848:8848
