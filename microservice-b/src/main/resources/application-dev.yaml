@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Bservice
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    name: defaultDataSource
+    url: jdbc:mysql://10.10.56.10:3306/Microservice-a?serverTimezone=UTC
+    username: root
+    password: mima8ge8
+
+
+  thymeleaf:
+    cache: false
+
+server:
+  port: 9080
+
