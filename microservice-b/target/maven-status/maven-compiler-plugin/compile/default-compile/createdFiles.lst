@@ -1,0 +1,8 @@
+com\example\serice\b\controller\InfoController.class
+com\example\serice\b\config\MybatisPlusConfig.class
+com\example\serice\b\dao\InfoDao.class
+com\example\serice\b\entity\Info.class
+com\example\serice\b\service\impl\InfoServiceImpl.class
+com\example\serice\b\service\InfoService.class
+com\example\serice\b\BserviceAplication.class
+com\example\serice\b\config\MyMetaObjectHandler.class
