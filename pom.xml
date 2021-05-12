@@ -19,6 +19,8 @@
         <module>microservice-b</module>
         <module>microservice-c</module>
         <module>common-dependency</module>
+        <module>gateway</module>
+
     </modules>
     <!--    版本对照-->
     <!--

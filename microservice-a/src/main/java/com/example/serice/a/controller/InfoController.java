@@ -4,8 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.serice.a.AserviceAplication;
 import com.example.serice.a.entity.Info;
 import com.example.serice.a.service.InfoService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -26,6 +30,12 @@ public class InfoController extends ApiController {
      */
     @Resource
     private InfoService infoService;
+
+    @Value("server.port")
+    private String port;
+
+    @Value("spring.application.name")
+    private String serviceName;
 
     /**
      * 分页查询所有数据
@@ -58,6 +68,8 @@ public class InfoController extends ApiController {
      */
     @PostMapping
     public R insert(@RequestBody Info info) {
+        info.setPort(port);
+        info.setServiceName(serviceName);
         return success(this.infoService.save(info));
     }
 
@@ -82,4 +94,50 @@ public class InfoController extends ApiController {
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.infoService.removeByIds(idList));
     }
+
+
+
+    /**
+     * @Classname InfoController
+     * @param
+     * @return
+     * @Description 通过a服务获取a和b服务数据
+     * @Date 2021/5/7 10:50
+     * @auther by GUOCHEN
+     */
+     @GetMapping("getFromB/{id}")
+     public R getFromB(@PathVariable("id") Long id){
+
+        return this.infoService.getFromB(id);
+     }
+
+
+    /**
+     * @Classname InfoController
+     * @param
+     * @return
+     * @Description 通过a服务获取a和c服务数据
+     * @Date 2021/5/7 10:50
+     * @auther by GUOCHEN
+     */
+    @GetMapping("getFromC/{id}")
+    public R getFromC(@PathVariable("id") Long id){
+
+        return this.infoService.getFromC(id);
+    }
+
+    /**
+     * @Classname InfoController
+     * @param
+     * @return
+     * @Description 通过a服务获取a和b还有c服务数据
+     * @Date 2021/5/7 10:50
+     * @auther by GUOCHEN
+     */
+    @GetMapping("getFromBandC/{id}")
+    public R getFromBandC(@PathVariable("id") Long id){
+        this.infoService.getFromBandC(id);
+        return this.infoService.getFromBandC(id);
+    }
+
 }

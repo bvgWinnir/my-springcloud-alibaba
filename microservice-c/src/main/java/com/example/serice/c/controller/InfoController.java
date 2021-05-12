@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.serice.c.entity.Info;
 import com.example.serice.c.service.InfoService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -26,6 +27,12 @@ public class InfoController extends ApiController {
      */
     @Resource
     private InfoService infoService;
+
+    @Value("server.port")
+    private String port;
+
+    @Value("spring.application.name")
+    private String serviceName;
 
     /**
      * 分页查询所有数据
@@ -58,6 +65,8 @@ public class InfoController extends ApiController {
      */
     @PostMapping
     public R insert(@RequestBody Info info) {
+        info.setPort(port);
+        info.setServiceName(serviceName);
         return success(this.infoService.save(info));
     }
 
