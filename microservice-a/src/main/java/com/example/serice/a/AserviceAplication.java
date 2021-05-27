@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
@@ -14,6 +15,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @Date 2021/4/19 23:26
  * @Created by guochen
  */
+@EnableFeignClients(basePackages = "com.example.serice.a.fegin")
 @EnableDiscoveryClient
 @SpringBootApplication
 @RefreshScope

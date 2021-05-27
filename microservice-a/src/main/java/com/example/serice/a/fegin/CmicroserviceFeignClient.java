@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author: GUOCHEN
  * @create: 2021/05/07 10:38
  */
-@FeignClient("microservice-c")
+@FeignClient("C-service")
 public interface CmicroserviceFeignClient {
 
     /**

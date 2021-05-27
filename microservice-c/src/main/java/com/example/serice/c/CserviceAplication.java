@@ -3,6 +3,7 @@ package com.example.serice.c;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * @Classname CserviceAplication
@@ -10,6 +11,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @Date 2021/4/19 23:30
  * @Created by guochen
  */
+@EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
 //@MapperScan("com.example.service.c")

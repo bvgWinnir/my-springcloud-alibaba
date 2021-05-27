@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * @author: GUOCHEN
  * @create: 2021/05/07 10:38
  */
-@FeignClient("microservice-b")
+@FeignClient("B-service")
 public interface BmicroserviceFeignClient {
     /**
      * 功能描述:查询 b服务的数据
