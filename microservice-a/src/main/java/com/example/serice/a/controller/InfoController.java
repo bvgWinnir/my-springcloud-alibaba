@@ -4,12 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.serice.a.AserviceAplication;
 import com.example.serice.a.entity.Info;
 import com.example.serice.a.service.InfoService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -23,7 +20,7 @@ import java.util.List;
  * @since 2021-05-06 17:39:00
  */
 @RestController
-@RequestMapping("info")
+@RequestMapping("ainfo")
 public class InfoController extends ApiController {
     /**
      * 服务对象
@@ -136,8 +133,22 @@ public class InfoController extends ApiController {
      */
     @GetMapping("getFromBandC/{id}")
     public R getFromBandC(@PathVariable("id") Long id){
-        this.infoService.getFromBandC(id);
+
         return this.infoService.getFromBandC(id);
+    }
+
+    /**
+     * @Classname
+     * @param
+     * @param info
+     * @return
+     * @Description not seate
+     * @Date 2021/5/27 10:13
+     * @auther by GUOCHEN
+     */
+    @PostMapping("A2B2C")
+    public R post(@RequestBody Info info) {
+        return infoService.insertNoSeateBandC(info);
     }
 
 }

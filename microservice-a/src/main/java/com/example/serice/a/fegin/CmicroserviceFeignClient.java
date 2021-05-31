@@ -25,9 +25,9 @@ public interface CmicroserviceFeignClient {
      * @author: 郭辰
      * @date: 2021/5/7 10:42
      */
-    @GetMapping("/info/{id}")
+    @GetMapping("/cinfo/{id}")
     R getCInfo(@PathVariable("id") Long id);
 
-    @PostMapping("/info")
+    @PostMapping("/cinfo")
     R insertCInfo(@RequestBody Info info);
 }

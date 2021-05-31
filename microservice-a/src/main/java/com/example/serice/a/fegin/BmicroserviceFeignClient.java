@@ -20,9 +20,9 @@ public interface BmicroserviceFeignClient {
      * @author: 郭辰
      * @date: 2021/5/7 10:42
      */
-    @GetMapping("/info/{id}")
+    @GetMapping("/binfo/{id}")
     R getBInfo(@PathVariable("id") Long id);
 
-    @PostMapping("/info")
+    @PostMapping("/binfo")
     R insertBInfo(@RequestBody Info info);
 }

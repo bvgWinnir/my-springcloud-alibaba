@@ -20,7 +20,7 @@ import java.util.List;
  * @since 2021-05-07 09:56:55
  */
 @RestController
-@RequestMapping("info")
+@RequestMapping("cinfo")
 public class InfoController extends ApiController {
     /**
      * 服务对象

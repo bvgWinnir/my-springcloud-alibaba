@@ -11,6 +11,7 @@ import com.example.serice.a.fegin.CmicroserviceFeignClient;
 import com.example.serice.a.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -58,5 +59,73 @@ public class InfoServiceImpl extends ServiceImpl<InfoDao, Info> implements InfoS
         jsonObject.put("aInfo",byId);
         jsonObject.put("bInfo",bInfo);
         return R.ok(jsonObject);
+    }
+
+    /**
+     * 功能描述: 没有seate 从A 保存B和C
+     *
+     * @param info
+     * @return: com.baomidou.mybatisplus.extension.api.R
+     * @author: 郭辰
+     * @date: 2021/5/27 10:17
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public R insertNoSeateBandC(Info info) {
+        return null;
+    }
+
+    /**
+     * 功能描述: 没有seate 按顺序保存
+     *
+     * @param info
+     * @return: com.baomidou.mybatisplus.extension.api.R
+     * @author: 郭辰
+     * @date: 2021/5/27 10:18
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public R insertNoSeateA2B2C(Info info) {
+        return null;
+    }
+
+    /**
+     * 功能描述: seate 从A 保存B和C
+     *
+     * @param info
+     * @return: com.baomidou.mybatisplus.extension.api.R
+     * @author: 郭辰
+     * @date: 2021/5/27 10:21
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public R insertSeateBandC(Info info) {
+        return null;
+    }
+
+    /**
+     * 功能描述: 按顺序保存
+     *
+     * @param info
+     * @return: com.baomidou.mybatisplus.extension.api.R
+     * @author: 郭辰
+     * @date: 2021/5/27 10:21
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public R insertSeateA2B2C(Info info) {
+        return null;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public R insertMQBandC(Info info) {
+        return null;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public R insertMQA2B2C(Info info) {
+        return null;
     }
 }
