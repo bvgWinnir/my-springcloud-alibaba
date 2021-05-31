@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
-
 /**
  * (Info)表服务实现类
  *
@@ -127,5 +125,10 @@ public class InfoServiceImpl extends ServiceImpl<InfoDao, Info> implements InfoS
     @Transactional(rollbackFor = Exception.class)
     public R insertMQA2B2C(Info info) {
         return null;
+    }
+
+    @Override
+    public R fromAcourseBarriveC(long id) {
+        return bmicroserviceFeignClient.getCInfoFromB(id);
     }
 }

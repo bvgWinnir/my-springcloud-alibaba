@@ -1,9 +1,12 @@
 package com.example.serice.b.service.impl;
 
+import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.serice.b.dao.InfoDao;
 import com.example.serice.b.entity.Info;
+import com.example.serice.b.fegin.CmicroserviceFeignClient;
 import com.example.serice.b.service.InfoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,4 +18,11 @@ import org.springframework.stereotype.Service;
 @Service("infoService")
 public class InfoServiceImpl extends ServiceImpl<InfoDao, Info> implements InfoService {
 
+    @Autowired
+    private CmicroserviceFeignClient client;
+
+    @Override
+    public R getCInfoFromB(Long id) {
+        return  client.getCInfo(id);
+    }
 }

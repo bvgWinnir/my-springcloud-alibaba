@@ -26,7 +26,7 @@ public class InfoController extends ApiController {
      * 服务对象
      */
     @Resource
-    private InfoService infoService;
+    private InfoService bInfoService;
 
     @Value("server.port")
     private String port;
@@ -43,7 +43,7 @@ public class InfoController extends ApiController {
      */
     @GetMapping
     public R selectAll(Page<Info> page, Info info) {
-        return success(this.infoService.page(page, new QueryWrapper<>(info)));
+        return success(this.bInfoService.page(page, new QueryWrapper<>(info)));
     }
 
     /**
@@ -54,7 +54,7 @@ public class InfoController extends ApiController {
      */
     @GetMapping("{id}")
     public R selectOne(@PathVariable Serializable id) {
-        return success(this.infoService.getById(id));
+        return success(this.bInfoService.getById(id));
     }
 
     /**
@@ -67,7 +67,7 @@ public class InfoController extends ApiController {
     public R insert(@RequestBody Info info) {
         info.setPort(port);
         info.setServiceName(serviceName);
-        return success(this.infoService.save(info));
+        return success(this.bInfoService.save(info));
     }
 
     /**
@@ -78,7 +78,7 @@ public class InfoController extends ApiController {
      */
     @PutMapping
     public R update(@RequestBody Info info) {
-        return success(this.infoService.updateById(info));
+        return success(this.bInfoService.updateById(info));
     }
 
     /**
@@ -89,6 +89,21 @@ public class InfoController extends ApiController {
      */
     @DeleteMapping
     public R delete(@RequestParam("idList") List<Long> idList) {
-        return success(this.infoService.removeByIds(idList));
+        return success(this.bInfoService.removeByIds(idList));
     }
+
+
+    /**
+     * @Classname InfoController
+     * @param
+     * @return
+     * @Description 从A 请求 经过 b 最后实际去查c
+     * @Date 2021/5/31 15:47
+     * @auther by GUOCHEN
+     */
+     @GetMapping("getCInfoFromB/{id}")
+     public R getCInfoFromB(@PathVariable("id") Long id){
+        return this.bInfoService.getCInfoFromB(id);
+     }
+
 }

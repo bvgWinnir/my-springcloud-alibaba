@@ -133,9 +133,22 @@ public class InfoController extends ApiController {
      */
     @GetMapping("getFromBandC/{id}")
     public R getFromBandC(@PathVariable("id") Long id){
-
         return this.infoService.getFromBandC(id);
     }
+
+
+    /**
+     * @Classname InfoController
+     * @param
+     * @return
+     * @Description 从A 请求 经过 b 最后实际去查c
+     * @Date 2021/5/31 15:40
+     * @auther by GUOCHEN
+     */
+     @GetMapping("fromAcourseBarriveC/{id}")
+     public R fromAcourseBarriveC(@PathVariable("id") long id){
+        return this.infoService.fromAcourseBarriveC(id);
+     }
 
     /**
      * @Classname

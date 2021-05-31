@@ -25,4 +25,7 @@ public interface BmicroserviceFeignClient {
 
     @PostMapping("/binfo")
     R insertBInfo(@RequestBody Info info);
+
+    @GetMapping("/binfo/getCInfoFromB/{id}")
+    R getCInfoFromB(@PathVariable("id")long id);
 }

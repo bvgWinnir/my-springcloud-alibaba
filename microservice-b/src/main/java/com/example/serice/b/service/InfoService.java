@@ -1,5 +1,6 @@
 package com.example.serice.b.service;
 
+import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.serice.b.entity.Info;
 
@@ -11,4 +12,5 @@ import com.example.serice.b.entity.Info;
  */
 public interface InfoService extends IService<Info> {
 
+    R getCInfoFromB(Long id);
 }

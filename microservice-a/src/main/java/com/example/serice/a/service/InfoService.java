@@ -56,4 +56,13 @@ public interface InfoService extends IService<Info> {
 
     R insertMQBandC(Info info);
     R insertMQA2B2C(Info info);
+
+    /**
+     * 功能描述: 从A 发请求经过B 最后去查c 链路追踪
+     * @param id
+     * @return: com.baomidou.mybatisplus.extension.api.R
+     * @author: 郭辰
+     * @date: 2021/5/31 15:43
+     */
+    R fromAcourseBarriveC(long id);
 }

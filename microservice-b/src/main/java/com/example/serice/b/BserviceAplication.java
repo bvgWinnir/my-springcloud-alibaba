@@ -11,7 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @Date 2021/4/19 23:29
  * @Created by guochen
  */
-
+@EnableFeignClients(basePackages = "com.example.serice.b.fegin")
 @EnableDiscoveryClient
 @SpringBootApplication
 public class BserviceAplication {
