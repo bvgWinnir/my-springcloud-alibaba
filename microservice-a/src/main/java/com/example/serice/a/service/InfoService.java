@@ -20,6 +20,7 @@ public interface InfoService extends IService<Info> {
 
     /**
      * 功能描述: 没有seate 从A 保存B和C
+     *
      * @param info
      * @return: com.baomidou.mybatisplus.extension.api.R
      * @author: 郭辰
@@ -29,6 +30,7 @@ public interface InfoService extends IService<Info> {
 
     /**
      * 功能描述: 没有seate 按顺序保存
+     *
      * @param info
      * @return: com.baomidou.mybatisplus.extension.api.R
      * @author: 郭辰
@@ -38,6 +40,7 @@ public interface InfoService extends IService<Info> {
 
     /**
      * 功能描述: seate 从A 保存B和C
+     *
      * @param info
      * @return: com.baomidou.mybatisplus.extension.api.R
      * @author: 郭辰
@@ -47,6 +50,7 @@ public interface InfoService extends IService<Info> {
 
     /**
      * 功能描述: 按顺序保存
+     *
      * @param info
      * @return: com.baomidou.mybatisplus.extension.api.R
      * @author: 郭辰
@@ -56,10 +60,21 @@ public interface InfoService extends IService<Info> {
 
     /**
      * seata 回滚
+     *
      * @param info
      * @return
      */
     R insertSeateA2B2CRollBack(Info info);
+
+    /**
+     * 功能描述: seata回滚 B服务中有异常
+     *
+     * @param info
+     * @return: com.baomidou.mybatisplus.extension.api.R
+     * @author: 郭辰
+     * @date: 2021/6/4 15:51
+     */
+    R insertSeateA2B2CRollBack4BException(Info info);
 
     R insertMQBandC(Info info);
 
@@ -67,10 +82,20 @@ public interface InfoService extends IService<Info> {
 
     /**
      * 功能描述: 从A 发请求经过B 最后去查c 链路追踪
+     *
      * @param id
      * @return: com.baomidou.mybatisplus.extension.api.R
      * @author: 郭辰
      * @date: 2021/5/31 15:43
      */
     R fromAcourseBarriveC(long id);
+
+    /**
+     * 功能描述: 测试seata 回滚   a服务中service 中调了封装的方法
+     * @param info
+     * @return: com.baomidou.mybatisplus.extension.api.R
+     * @author: 郭辰
+     * @date: 2021/6/4 16:07
+     */
+    R insertSeateA2B2CRollBack3(Info info);
 }

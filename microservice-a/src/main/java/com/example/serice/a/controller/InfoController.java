@@ -28,10 +28,10 @@ public class InfoController extends ApiController {
     @Resource
     private InfoService infoService;
 
-    @Value("server.port")
+    @Value("${server.port}")
     private String port;
 
-    @Value("spring.application.name")
+    @Value("${spring.application.name}")
     private String serviceName;
 
     /**
@@ -172,9 +172,40 @@ public class InfoController extends ApiController {
         return infoService.insertSeateBandC(info);
     }
 
+    /**
+     * 功能描述: 测试 seata 回滚 没有rollback不回滚 a中有为知异常
+     * @param info
+     * @return: com.baomidou.mybatisplus.extension.api.R
+     * @author: 郭辰
+     * @date: 2021/6/4 15:39
+     */
     @PostMapping("insertSeateA2B2CRollBack")
     public R insertSeateA2B2CRollBack(@RequestBody Info info) {
         return infoService.insertSeateA2B2CRollBack(info);
+    }
+
+    /**
+     * 功能描述: 测试seata回滚 b中有异常全部都回滚
+     * @param info
+     * @return: com.baomidou.mybatisplus.extension.api.R
+     * @author: 郭辰
+     * @date: 2021/6/4 16:03
+     */
+    @PostMapping("insertSeateA2B2CRollBack4BException")
+    public R insertSeateA2B2CRollBack4BException(@RequestBody Info info) {
+        return infoService.insertSeateA2B2CRollBack4BException(info);
+    }
+
+    /**
+     * 功能描述: 测试seata 回滚   a服务中service 中调了封装的方法
+     * @param info
+     * @return: com.baomidou.mybatisplus.extension.api.R
+     * @author: 郭辰
+     * @date: 2021/6/4 16:06
+     */
+    @PostMapping("insertSeateA2B2CRollBack3")
+    public R insertSeateA2B2CRollBack3(@RequestBody Info info) {
+        return infoService.insertSeateA2B2CRollBack3(info);
     }
 
     @PostMapping("insertSeateA2B2C")

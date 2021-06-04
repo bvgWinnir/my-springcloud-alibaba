@@ -70,6 +70,19 @@ public class InfoController extends ApiController {
         return success(this.bInfoService.save(info));
     }
 
+    @PostMapping("/insertBInfoHasException")
+    public R insertBInfoHasException (@RequestBody Info info) {
+        info.setPort(port);
+        info.setServiceName(serviceName);
+        try {
+            int a = 10/0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return success(this.bInfoService.save(info));
+    }
+
     /**
      * 修改数据
      *

@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.serice.a.dao.InfoDao;
 import com.example.serice.a.entity.Info;
-
 import com.example.serice.a.fegin.BmicroserviceFeignClient;
 import com.example.serice.a.fegin.CmicroserviceFeignClient;
 import com.example.serice.a.service.InfoService;
@@ -37,9 +36,9 @@ public class InfoServiceImpl extends ServiceImpl<InfoDao, Info> implements InfoS
         R bInfo = bmicroserviceFeignClient.getBInfo(id);
         R cInfo = cmicroserviceFeignClient.getCInfo(id);
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("aInfo",byId);
-        jsonObject.put("bInfo",bInfo);
-        jsonObject.put("cInfo",cInfo);
+        jsonObject.put("aInfo", byId);
+        jsonObject.put("bInfo", bInfo);
+        jsonObject.put("cInfo", cInfo);
         return R.ok(jsonObject);
     }
 
@@ -48,8 +47,8 @@ public class InfoServiceImpl extends ServiceImpl<InfoDao, Info> implements InfoS
         Info byId = this.getById(id);
         R cInfo = cmicroserviceFeignClient.getCInfo(id);
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("aInfo",byId);
-        jsonObject.put("cInfo",cInfo);
+        jsonObject.put("aInfo", byId);
+        jsonObject.put("cInfo", cInfo);
         return R.ok(jsonObject);
     }
 
@@ -58,8 +57,8 @@ public class InfoServiceImpl extends ServiceImpl<InfoDao, Info> implements InfoS
         Info byId = this.getById(id);
         R bInfo = bmicroserviceFeignClient.getBInfo(id);
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("aInfo",byId);
-        jsonObject.put("bInfo",bInfo);
+        jsonObject.put("aInfo", byId);
+        jsonObject.put("bInfo", bInfo);
         return R.ok(jsonObject);
     }
 
@@ -77,18 +76,18 @@ public class InfoServiceImpl extends ServiceImpl<InfoDao, Info> implements InfoS
         info.setServiceName("microservice-a");
         JSONObject jsonObject = new JSONObject();
         boolean save = this.save(info);
-        jsonObject.put("aInfo",save);
+        jsonObject.put("aInfo", save);
 
-            info.setServiceName("a->b");
-            R r = bmicroserviceFeignClient.insertBInfo(info);
-            log.info("bmicroserviceFeignClient.insertBInfo ->result:{}", JSON.toJSONString(r));
+        info.setServiceName("a->b");
+        R r = bmicroserviceFeignClient.insertBInfo(info);
+        log.info("bmicroserviceFeignClient.insertBInfo ->result:{}", JSON.toJSONString(r));
 
-            info.setServiceName("a->b->c");
-            R r1 = cmicroserviceFeignClient.insertCInfo(info);
-            log.info("cmicroserviceFeignClient.insertCInfo ->result:{}", JSON.toJSONString(r1));
+        info.setServiceName("a->b->c");
+        R r1 = cmicroserviceFeignClient.insertCInfo(info);
+        log.info("cmicroserviceFeignClient.insertCInfo ->result:{}", JSON.toJSONString(r1));
 
-            jsonObject.put("bInfo",r);
-            jsonObject.put("cInfo",r1);
+        jsonObject.put("bInfo", r);
+        jsonObject.put("cInfo", r1);
 
         return R.ok(jsonObject);
     }
@@ -122,7 +121,7 @@ public class InfoServiceImpl extends ServiceImpl<InfoDao, Info> implements InfoS
         info.setServiceName("microservice-a");
         JSONObject jsonObject = new JSONObject();
         boolean save = this.save(info);
-        jsonObject.put("aInfo",save);
+        jsonObject.put("aInfo", save);
 
         info.setServiceName("a->b");
         R r = bmicroserviceFeignClient.insertBInfo(info);
@@ -132,8 +131,8 @@ public class InfoServiceImpl extends ServiceImpl<InfoDao, Info> implements InfoS
         R r1 = cmicroserviceFeignClient.insertCInfo(info);
         log.info("cmicroserviceFeignClient.insertCInfo ->result:{}", JSON.toJSONString(r1));
 
-        jsonObject.put("bInfo",r);
-        jsonObject.put("cInfo",r1);
+        jsonObject.put("bInfo", r);
+        jsonObject.put("cInfo", r1);
 
         return R.ok(jsonObject);
     }
@@ -153,47 +152,53 @@ public class InfoServiceImpl extends ServiceImpl<InfoDao, Info> implements InfoS
         info.setServiceName("microservice-a");
         JSONObject jsonObject = new JSONObject();
         boolean save = this.save(info);
-        jsonObject.put("aInfo",save);
-        if (!save){
+        jsonObject.put("aInfo", save);
+        if (!save) {
             return R.failed("amicroserviceFeignClient.insertaInfo failed");
         }
         info.setServiceName("a->b");
         R r = bmicroserviceFeignClient.insertBInfo(info);
         log.info("bmicroserviceFeignClient.insertBInfo ->result:{}", JSON.toJSONString(r));
-        if (!r.ok()){
+        if (!r.ok()) {
             return R.failed("bmicroserviceFeignClient.insertBInfo failed");
         }
         info.setServiceName("a->b->c");
         R r1 = cmicroserviceFeignClient.insertCInfo(info);
         log.info("cmicroserviceFeignClient.insertCInfo ->result:{}", JSON.toJSONString(r1));
-        if (!r1.ok()){
+        if (!r1.ok()) {
             return R.failed("cmicroserviceFeignClient.insertCInfo failed");
         }
-        jsonObject.put("bInfo",r);
-        jsonObject.put("cInfo",r1);
+        jsonObject.put("bInfo", r);
+        jsonObject.put("cInfo", r1);
 
         return R.ok(jsonObject);
     }
 
     /**
-     * seata 回滚
+     * 功能描述: seata回滚(a中有为知异常)
+     * 必须要加 (rollbackFor = Exception.class) 不加不回滚
+     * 必须要加 (rollbackFor = Exception.class) 不加不回滚
+     * 必须要加 (rollbackFor = Exception.class) 不加不回滚
+     * 必须要加 (rollbackFor = Exception.class) 不加不回滚
      *
      * @param info
-     * @return
+     * @return: com.baomidou.mybatisplus.extension.api.R
+     * @author: 郭辰
+     * @date: 2021/6/4 15:49
      */
     @Override
-    @GlobalTransactional
-    public R insertSeateA2B2CRollBack(Info info)  {
+    @GlobalTransactional(rollbackFor = Exception.class)
+    public R insertSeateA2B2CRollBack(Info info) {
         info.setServiceName("microservice-a");
         JSONObject jsonObject = new JSONObject();
         boolean save = this.save(info);
-        jsonObject.put("aInfo",save);
-        if (!save){
+        jsonObject.put("aInfo", save);
+        if (!save) {
             return R.failed("amicroserviceFeignClient.insertaInfo failed");
         }
 
         try {
-            int a = 10/0;
+            int a = 10 / 0;
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
@@ -202,17 +207,54 @@ public class InfoServiceImpl extends ServiceImpl<InfoDao, Info> implements InfoS
         info.setServiceName("a->b");
         R r = bmicroserviceFeignClient.insertBInfo(info);
         log.info("bmicroserviceFeignClient.insertBInfo ->result:{}", JSON.toJSONString(r));
-        if (!r.ok()){
+        if (!r.ok()) {
             return R.failed("bmicroserviceFeignClient.insertBInfo failed");
         }
         info.setServiceName("a->b->c");
         R r1 = cmicroserviceFeignClient.insertCInfo(info);
         log.info("cmicroserviceFeignClient.insertCInfo ->result:{}", JSON.toJSONString(r1));
-        if (!r1.ok()){
+        if (!r1.ok()) {
             return R.failed("cmicroserviceFeignClient.insertCInfo failed");
         }
-        jsonObject.put("bInfo",r);
-        jsonObject.put("cInfo",r1);
+        jsonObject.put("bInfo", r);
+        jsonObject.put("cInfo", r1);
+
+        return R.ok(jsonObject);
+    }
+
+    /**
+     * 功能描述: seata回滚 B服务中有异常
+     *
+     * @param info
+     * @return: com.baomidou.mybatisplus.extension.api.R
+     * @author: 郭辰
+     * @date: 2021/6/4 15:51
+     */
+    @Override
+    @GlobalTransactional(rollbackFor = Exception.class)
+    public R insertSeateA2B2CRollBack4BException(Info info) {
+        info.setServiceName("microservice-a");
+        JSONObject jsonObject = new JSONObject();
+        boolean save = this.save(info);
+        jsonObject.put("aInfo", save);
+        if (!save) {
+            return R.failed("amicroserviceFeignClient.insertaInfo failed");
+        }
+
+        info.setServiceName("a->b");
+        R r = bmicroserviceFeignClient.insertBInfoHasException(info);
+        log.info("bmicroserviceFeignClient.insertBInfo ->result:{}", JSON.toJSONString(r));
+        if (!r.ok()) {
+            return R.failed("bmicroserviceFeignClient.insertBInfo failed");
+        }
+        info.setServiceName("a->b->c");
+        R r1 = cmicroserviceFeignClient.insertCInfo(info);
+        log.info("cmicroserviceFeignClient.insertCInfo ->result:{}", JSON.toJSONString(r1));
+        if (!r1.ok()) {
+            return R.failed("cmicroserviceFeignClient.insertCInfo failed");
+        }
+        jsonObject.put("bInfo", r);
+        jsonObject.put("cInfo", r1);
 
         return R.ok(jsonObject);
     }
@@ -232,5 +274,45 @@ public class InfoServiceImpl extends ServiceImpl<InfoDao, Info> implements InfoS
     @Override
     public R fromAcourseBarriveC(long id) {
         return bmicroserviceFeignClient.getCInfoFromB(id);
+    }
+
+    @Override
+    @GlobalTransactional(rollbackFor = Exception.class)
+    public R insertSeateA2B2CRollBack3(Info info) {
+        info.setServiceName("microservice-a");
+        JSONObject jsonObject = new JSONObject();
+        boolean save = this.save(info);
+        jsonObject.put("aInfo", save);
+        if (!save) {
+            return R.failed("amicroserviceFeignClient.insertaInfo failed");
+        }
+
+        this.xxx();
+
+        info.setServiceName("a->b");
+        R r = bmicroserviceFeignClient.insertBInfo(info);
+        log.info("bmicroserviceFeignClient.insertBInfo ->result:{}", JSON.toJSONString(r));
+        if (!r.ok()) {
+            return R.failed("bmicroserviceFeignClient.insertBInfo failed");
+        }
+        info.setServiceName("a->b->c");
+        R r1 = cmicroserviceFeignClient.insertCInfo(info);
+        log.info("cmicroserviceFeignClient.insertCInfo ->result:{}", JSON.toJSONString(r1));
+        if (!r1.ok()) {
+            return R.failed("cmicroserviceFeignClient.insertCInfo failed");
+        }
+        jsonObject.put("bInfo", r);
+        jsonObject.put("cInfo", r1);
+
+        return R.ok(jsonObject);
+    }
+
+    private void xxx() {
+        try {
+            int a = 10 / 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 }
