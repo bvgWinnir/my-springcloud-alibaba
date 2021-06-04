@@ -54,7 +54,15 @@ public interface InfoService extends IService<Info> {
      */
     R insertSeateA2B2C(Info info);
 
+    /**
+     * seata 回滚
+     * @param info
+     * @return
+     */
+    R insertSeateA2B2CRollBack(Info info);
+
     R insertMQBandC(Info info);
+
     R insertMQA2B2C(Info info);
 
     /**

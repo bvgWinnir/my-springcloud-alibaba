@@ -159,9 +159,39 @@ public class InfoController extends ApiController {
      * @Date 2021/5/27 10:13
      * @auther by GUOCHEN
      */
-    @PostMapping("A2B2C")
-    public R post(@RequestBody Info info) {
+    @PostMapping("insertNoSeateBandC")
+    public R insertNoSeateBandC(@RequestBody Info info) {
         return infoService.insertNoSeateBandC(info);
     }
+
+    @PostMapping("insertNoSeateA2B2C")
+    public R insertNoSeateA2B2C(@RequestBody Info info) { return infoService.insertNoSeateA2B2C(info); }
+
+    @PostMapping("insertSeateBandC")
+    public R insertSeateBandC(@RequestBody Info info) {
+        return infoService.insertSeateBandC(info);
+    }
+
+    @PostMapping("insertSeateA2B2CRollBack")
+    public R insertSeateA2B2CRollBack(@RequestBody Info info) {
+        return infoService.insertSeateA2B2CRollBack(info);
+    }
+
+    @PostMapping("insertSeateA2B2C")
+    public R insertSeateA2B2C(@RequestBody Info info) {
+        return infoService.insertSeateA2B2C(info);
+    }
+
+    @PostMapping("insertMQBandC")
+    public R insertMQBandC(@RequestBody Info info) {
+        return infoService.insertMQBandC(info);
+    }
+
+    @PostMapping("insertMQA2B2C")
+    public R insertMQA2B2C(@RequestBody Info info) {
+        return infoService.insertMQA2B2C(info);
+    }
+
+
 
 }

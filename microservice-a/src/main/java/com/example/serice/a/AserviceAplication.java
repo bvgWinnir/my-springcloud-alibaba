@@ -1,5 +1,6 @@
 package com.example.serice.a;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -19,6 +20,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @EnableDiscoveryClient
 @SpringBootApplication
 @RefreshScope
+@Slf4j
 public class AserviceAplication {
 
     public static void main(String[] args) {
@@ -27,6 +29,8 @@ public class AserviceAplication {
         String userAge = applicationContext.getEnvironment().getProperty("user.age");
         System.err.println("user name :"+userName+"; age: "+userAge);
         System.err.println("以上不为null 表示从nacos 中读到配置了");
+        log.info("user name:{}   ->userAge:{}",userName,userAge);
+        log.info("以上不为null 表示从nacos 中读到配置了");
     }
 
 }
